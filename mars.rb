@@ -2,13 +2,13 @@ class Rover
 
   attr_accessor :x_coordinate, :y_coordinate, :direction, :text_filename, :upper_right_corner
 
-  def initialize # Default rover position: Bottom left, facing north
+  def initialize
     @lower_left_corner  = [0, 0]
     @upper_right_corner = []
     @x_coordinate       = 0
     @y_coordinate       = 0
-    @direction          = 'N'
-    @text_filename      = 'text_filename'
+    @direction          = ''
+    @text_filename      = ''
   end
 
   def get_file
@@ -25,13 +25,18 @@ class Rover
 
   def read_instruction(instruction)
     # Split file contents into array
-    @input = @text_filename.split
+    @raw_input = @text_filename.split
+
     # Convert first two characters to integers -- they will establish upper right corner (5, 5)
     # (the lower left is assumed to be 0, 0)
-    # Store in a variable for the upper right corner
+    # Store in a variable for the upper right corner (This information doesn't seem useful to keep)
     @upper_right_corner = @text_filename(0,1)
-    # Iterate over the array:
-    @input.each do |character|
+
+    # Remove those two integers:
+    @rover_movement = @raw_input.shift(2)
+
+    # Iterate over the new array:
+    @rover_movement.each do |character|
       if character == 'L'
         turn_left
       elsif character == 'R'
