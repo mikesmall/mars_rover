@@ -1,18 +1,18 @@
 class Rover
 
-  attr_accessor :x_position, :y_position, :direction, :text_filename
+  attr_accessor :x_coordinate, :y_coordinate, :direction, :text_filename, :upper_right_corner
 
   def initialize # Default rover position: Bottom left, facing north
-    @x_coordinate  = 0
-    @y_coordinate  = 0
-    @direction     = 'N'
-    @text_filename = 'text_filename'
+    @lower_left_corner  = [0, 0]
+    @upper_right_corner = []
+    @x_coordinate       = 0
+    @y_coordinate       = 0
+    @direction          = 'N'
+    @text_filename      = 'text_filename'
   end
 
   def get_file
-
     # For now, accept string entered by user:
-
     puts 'Type or paste your entire input: '
     @text_filename = gets.chomp.to_s
     # Future file-acceptance code:
@@ -20,28 +20,47 @@ class Rover
     # @text_filename = gets.chomp.to_s
     # File.open(@text_filename).each do |line|
     #  @input = line.split('')
-
     end
   end
 
   def read_instruction(instruction)
-    # Split file contents into array
-    @input = @text_filename.split
-    # 'If' statements for useable characters:
-    @input.each do |character|
-      # -- 0..9 (x/y coordinates)
-      # ----- convert 0..9 to integers
 
-      
-      # -- N, E, W, S (north, south, east, west)
-      # -- L, R, M (left, right, move)
+    # Split file contents into array
+
+    # Iterate over the array:
+
+    # Convert first two characters to integers -- they will establish upper right corner (5, 5)
+    # (the lower left is assumed to be 0, 0)
+    # Store in a variable for the upper right corner
+
+    # Convert second two characters to integers -- they will establish rover's starting position
 
     end
 
   end
 
-  def turn(right_or_left)
+  def turn_left
+    if @direction == 'N'
+      @direction = 'W'
+    elsif @direction == 'W'
+      @direction = 'S'
+    elsif @direction == 'S'
+      @direction = 'E'
+    elsif @direction == 'E'
+      @direction = 'N'
+    end
+  end
 
+  def turn_right
+    if @direction == 'N'
+      @direction = 'E'
+    elsif @direction == 'E'
+      @direction = 'S'
+    elsif @direction == 'S'
+      @direction = 'W'
+    elsif @direction == 'W'
+      @direction = 'N'
+    end
   end
 
   def move(number_of_steps)
