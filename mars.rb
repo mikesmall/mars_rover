@@ -26,12 +26,15 @@ class Rover
   def read_instruction(instruction)
 
     # Split file contents into array
-
-    # Iterate over the array:
+    @input = @text_filename.split
 
     # Convert first two characters to integers -- they will establish upper right corner (5, 5)
     # (the lower left is assumed to be 0, 0)
     # Store in a variable for the upper right corner
+    @upper_right_corner = @text_filename(0,1)
+
+    # Iterate over the array:
+    
 
     # Convert second two characters to integers -- they will establish rover's starting position
 
@@ -85,6 +88,4 @@ end
 
 get_file
 read_instruction(@text_filename)
-turn
-move
 give_result
