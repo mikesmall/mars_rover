@@ -1,5 +1,13 @@
 # Mars Rover
 
+## Submission Instructions
+
+Email a zip file containing everything needed to build and execute your application and tests to [#####]. Please include any instructions that we might need to get your application running.
+
+It must be possible to supply input data to your application via a text file.
+
+Along with the code, please also include a short explanation of the design of your application and any assumptions you made.
+
 ## The Problem
 
 A squad of robotic rovers are to be landed by NASA on a plateau on Mars. This plateau, which is curiously rectangular, must be navigated by the rovers so that their on-board cameras can get a complete view of the surrounding terrain to send back to Earth.
