@@ -9,28 +9,34 @@ class Rover
     @text_filename = 'text_filename'
   end
 
-  def get_file(filename)
-    puts 'Type the name of your input file (e.g. input.txt): '
+  def get_file
+
+    # For now, accept string entered by user:
+
+    puts 'Type or paste your entire input: '
     @text_filename = gets.chomp.to_s
-
-    File.open(@text_filename).each do |line|
-
-      @input = line.split('')
-
-      @input.each do |character|
-        if character == ''
-      end
+    # Future file-acceptance code:
+    # puts 'Type the name of your input file (e.g. input.txt): '
+    # @text_filename = gets.chomp.to_s
+    # File.open(@text_filename).each do |line|
+    #  @input = line.split('')
 
     end
   end
 
   def read_instruction(instruction)
     # Split file contents into array
+    @input = @text_filename.split
     # 'If' statements for useable characters:
-    # -- 0..9 (x/y coordinates)
-    # ----- convert 0..9 to integers
-    # -- N, E, W, S (north, south, east, west)
-    # -- L, R, M (left, right, move)
+    @input.each do |character|
+      # -- 0..9 (x/y coordinates)
+      # ----- convert 0..9 to integers
+
+      
+      # -- N, E, W, S (north, south, east, west)
+      # -- L, R, M (left, right, move)
+
+    end
 
   end
 
@@ -59,7 +65,7 @@ class Rover
 end
 
 get_file
-read_instruction
+read_instruction(@text_filename)
 turn
 move
 give_result
