@@ -10,9 +10,18 @@ class Rover
   end
 
   def get_file(filename)
-    # Accept file
     puts 'Type the name of your input file (e.g. input.txt): '
-    @text_filename = gets.chomp
+    @text_filename = gets.chomp.to_s
+
+    File.open(@text_filename).each do |line|
+
+      @input = line.split('')
+
+      @input.each do |character|
+        if character == ''
+      end
+
+    end
   end
 
   def read_instruction(instruction)
@@ -25,16 +34,26 @@ class Rover
 
   end
 
-  def turn # Affects direction of rover
+  def turn(right_or_left)
 
   end
 
-  def move # Affects position of rover
+  def move(number_of_steps)
 
   end
 
-  def give_result # Print new position of rover
-    puts 'The Mars Rover is now at X-coordinate #{@x_coordinate}, Y-coordinate #{@y_coordinate}, facing #{@direction}.'
+  def give_result
+    @direction_to_string = ''
+    if @direction == 'N'
+      @direction_to_string = 'North'
+    elsif @direction == 'E'
+      @direction_to_string = 'East'
+    elsif @direction == 'W'
+      @direction_to_string = 'West'
+    elsif @direction == 'S'
+      @direction_to_string = 'South'
+    end
+    puts 'The Mars Rover is now at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction}.'
   end
 
 end
