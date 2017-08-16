@@ -24,20 +24,20 @@ class Rover
   end
 
   def read_instruction(instruction)
-
     # Split file contents into array
     @input = @text_filename.split
-
     # Convert first two characters to integers -- they will establish upper right corner (5, 5)
     # (the lower left is assumed to be 0, 0)
     # Store in a variable for the upper right corner
     @upper_right_corner = @text_filename(0,1)
-
     # Iterate over the array:
-    
-
-    # Convert second two characters to integers -- they will establish rover's starting position
-
+    @input.each do |character|
+      if character == 'L'
+        turn_left
+      elsif character == 'R'
+        turn_right
+      elsif character == 'M'
+        move
     end
 
   end
@@ -52,6 +52,7 @@ class Rover
     elsif @direction == 'E'
       @direction = 'N'
     end
+    puts 'The Mars Rover turned left.'
   end
 
   def turn_right
@@ -64,6 +65,7 @@ class Rover
     elsif @direction == 'W'
       @direction = 'N'
     end
+    puts 'The Mars Rover turned right.'
   end
 
   def move(number_of_steps)
@@ -81,7 +83,7 @@ class Rover
     elsif @direction == 'S'
       @direction_to_string = 'South'
     end
-    puts 'The Mars Rover is now at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction}.'
+    puts 'The Mars Rover has arrived at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction}.'
   end
 
 end
