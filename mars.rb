@@ -1,6 +1,6 @@
 class Rover
 
-  attr_accessor :x_coordinate, :y_coordinate, :direction, :text_filename, :instructions
+  attr_accessor :x_coordinate, :y_coordinate, :direction, :instructions, :the_file
 
   def initialize
     @lower_left_corner  = [0, 0]
@@ -8,6 +8,7 @@ class Rover
     @x_coordinate       = 0
     @y_coordinate       = 0
     @direction          = ""
+    @the_file           = ""
     @instructions       = []
   end
 
@@ -25,34 +26,30 @@ class Rover
   end
 
   def get_file
-    # For now, accept string entered by user:
-    puts "Type or paste your entire input: "
-    @instructions = gets.chomp
-    # Future file-acceptance code:
-    # puts "Type the name of your input file (e.g. input.txt): "
-    # @text_filename = gets.chomp.to_s
-    # File.open(@text_filename).each do |line|
-    #  @input = line.split("")
+    puts "Enter filename: "
+    @the_file = gets.chomp
+    @instructions = File.readlines("#{@the_file}").map
+    # Remove "\n" from array elements:
+    
     read_instruction
   end
 
   def read_instruction
-    # Split file contents into array
-    @instructions = @instructions.split
-
-    # First two characters establish upper right corner
-    # (Lower left is assumed to be 0, 0)
-    puts "Upper-right corner of Plateau detected: X-coordinate #{@instructions[0]} and Y-coordinate #{@instructions[1]}."
+    # Create array from input:
+    @upper_right_corner = @instructions[0].split("").to_i
     puts "Lower-left corner of Plateau is X-coordinate #{@lower_left_corner[0]} and Y-coordinate #{@lower_left_corner[1]}."
+    puts "Upper-right corner of Plateau detected: X-coordinate #{@upper_right_corner[0]} and Y-coordinate #{@upper_right_corner[1]}."
 
     # Initial Rover placement:
-    @x_coordinate = @instructions[2].to_i
-    @y_coordinate = @instructions[3].to_i
-    @direction = @instructions[4]
+    @initial_placement = @instructions[1].split("")
+    @x_coordinate = @initial_placement[0].to_i
+    @y_coordinate = @initial_placement[1].to_i
+    @direction    = @initial_placement[2].to_i
     direction_to_string
-    puts "A Mars Rover landed on the Plateau at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
+    puts "A Mars Rover landed at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
+
     # Rover movement:
-    @movements = @instructions[5].split("")
+    @movements = @instructions[2].split("")
     @movements.each do |character|
       if character == "L"
         turn_left
@@ -75,7 +72,7 @@ class Rover
     elsif @direction == "E"
       @direction = "N"
     end
-    puts "The Rover turned left."
+    puts "It turned left."
   end
 
   def turn_right
@@ -88,7 +85,7 @@ class Rover
     elsif @direction == "W"
       @direction = "N"
     end
-    puts "The Rover turned right."
+    puts "It turned right."
   end
 
   def move
@@ -101,12 +98,12 @@ class Rover
     elsif direction == "W"
       @x_coordinate -= 1
     end
-    puts "The Rover moved forward."
+    puts "It moved forward."
   end
 
   def give_result
     direction_to_string
-    puts "The Rover has arrived at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
+    puts "The Mars Rover has arrived at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
   end
 
 end
