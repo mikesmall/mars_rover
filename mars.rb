@@ -30,21 +30,24 @@ class Rover
     @the_file = gets.chomp
     @instructions = File.readlines("#{@the_file}").map
     # Remove "\n" from array elements:
-    
+    @instructions.each do |instruction|
+      instruction.chop!
+    end
+    @instructions = @instructions.to_a
     read_instruction
   end
 
   def read_instruction
     # Create array from input:
-    @upper_right_corner = @instructions[0].split("").to_i
+    @upper_right_corner = @instructions[0].split
     puts "Lower-left corner of Plateau is X-coordinate #{@lower_left_corner[0]} and Y-coordinate #{@lower_left_corner[1]}."
     puts "Upper-right corner of Plateau detected: X-coordinate #{@upper_right_corner[0]} and Y-coordinate #{@upper_right_corner[1]}."
 
     # Initial Rover placement:
-    @initial_placement = @instructions[1].split("")
+    @initial_placement = @instructions[1].split
     @x_coordinate = @initial_placement[0].to_i
     @y_coordinate = @initial_placement[1].to_i
-    @direction    = @initial_placement[2].to_i
+    @direction    = @initial_placement[2]
     direction_to_string
     puts "A Mars Rover landed at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
 
