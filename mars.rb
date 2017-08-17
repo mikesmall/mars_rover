@@ -35,7 +35,11 @@ class Rover
     # Remove those two integers:
     @rover_movement = @raw_input.shift(2)
 
-    # Iterate over the new array:
+    # Get initial placement:
+    @x_coordinate = @rover_movement(0).to_i
+    @y_coordinate = @rover_movement(1).to_i
+
+    # Iterate over the array:
     @rover_movement.each do |character|
       if character == 'L'
         turn_left
@@ -73,8 +77,17 @@ class Rover
     puts 'The Mars Rover turned right.'
   end
 
-  def move(number_of_steps)
-
+  def move
+    if direction == 'N'
+      @y_coordinate += 1
+    elsif direction == 'E'
+      @x_coordinate += 1
+    elsif direction == 'S'
+      @y_coordinate -= 1
+    elsif direction == 'W'
+      @x_coordinate -= 1
+    end
+    puts 'The Mars Rover moved forward.'
   end
 
   def give_result
