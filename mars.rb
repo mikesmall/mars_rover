@@ -12,6 +12,7 @@ class Rover
     @instructions       = []
   end
 
+  # Create some proper English for output:
   def direction_to_string
     @direction_to_string = ""
       if @direction == "N"
@@ -26,6 +27,7 @@ class Rover
   end
 
   def get_file
+    puts "\n"
     puts "Enter filename: "
     @the_file = gets.chomp
     @instructions = File.readlines("#{@the_file}").map
@@ -40,6 +42,7 @@ class Rover
   def read_instruction
     # Create array from input:
     @upper_right_corner = @instructions[0].split
+    puts "\n"
     puts "Lower-left corner of Plateau is X-coordinate #{@lower_left_corner[0]} and Y-coordinate #{@lower_left_corner[1]}."
     puts "Upper-right corner of Plateau detected: X-coordinate #{@upper_right_corner[0]} and Y-coordinate #{@upper_right_corner[1]}."
 
@@ -66,6 +69,7 @@ class Rover
     give_result
   end
 
+  # How the Rover turns left:
   def turn_left
     if @direction == "N"
       @direction = "W"
@@ -79,6 +83,7 @@ class Rover
     puts "It turned left."
   end
 
+  # How the Rover turns right:
   def turn_right
     if @direction == "N"
       @direction = "E"
@@ -92,6 +97,7 @@ class Rover
     puts "It turned right."
   end
 
+  # How the Rover moves forward:
   def move
     if direction == "N"
       @y_coordinate += 1
@@ -105,6 +111,7 @@ class Rover
     puts "It moved forward."
   end
 
+  # Report final location of Rover:
   def give_result
     direction_to_string
     puts "The Mars Rover has arrived at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
@@ -113,5 +120,5 @@ class Rover
 
 end
 
-rover1 = Rover.new
-rover1.get_file
+mars_rover = Rover.new
+mars_rover.get_file

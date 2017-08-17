@@ -1,5 +1,9 @@
 # Mars Rover
 
+For now, the program works for a single Rover object only.
+
+Use rover1.txt and rover2.txt for inputs.
+
 ## Submission Instructions
 
 Email a zip file containing everything needed to build and execute your application and tests to [#####]. Please include any instructions that we might need to get your application running.
