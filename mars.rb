@@ -45,10 +45,11 @@ class Rover
 
     # Initial Rover placement:
     @initial_placement = @instructions[1].split
-    @x_coordinate = @initial_placement[0].to_i
-    @y_coordinate = @initial_placement[1].to_i
-    @direction    = @initial_placement[2]
+    @x_coordinate      = @initial_placement[0].to_i
+    @y_coordinate      = @initial_placement[1].to_i
+    @direction         = @initial_placement[2]
     direction_to_string
+    puts "\n"
     puts "A Mars Rover landed at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
 
     # Rover movement:
@@ -107,6 +108,7 @@ class Rover
   def give_result
     direction_to_string
     puts "The Mars Rover has arrived at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
+    puts "\n"
   end
 
 end
