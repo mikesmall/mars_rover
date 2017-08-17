@@ -1,6 +1,6 @@
 class Rover
 
-  attr_accessor :x_coordinate, :y_coordinate, :direction, :text_filename, :upper_right_corner, :instructions
+  attr_accessor :x_coordinate, :y_coordinate, :direction, :text_filename, :instructions
 
   def initialize
     @lower_left_corner  = [0, 0]
@@ -8,7 +8,7 @@ class Rover
     @x_coordinate       = 0
     @y_coordinate       = 0
     @direction          = ""
-    @text_filename      = text_filename
+    @instructions       = []
   end
 
   def direction_to_string
@@ -27,7 +27,7 @@ class Rover
   def get_file
     # For now, accept string entered by user:
     puts "Type or paste your entire input: "
-    @text_filename = gets.chomp
+    @instructions = gets.chomp
     # Future file-acceptance code:
     # puts "Type the name of your input file (e.g. input.txt): "
     # @text_filename = gets.chomp.to_s
@@ -38,21 +38,22 @@ class Rover
 
   def read_instruction
     # Split file contents into array
-    @instructions = @text_filename.chars
+    @instructions = @instructions.split
 
     # First two characters establish upper right corner
     # (Lower left is assumed to be 0, 0)
-    @upper_right_corner = @instructions[0,1]
-    puts "Upper-right corner of plateau: X(#{@upper_right_corner[0]}), Y(#{@upper_right_corner[1]})"
+    puts "Upper-right corner of Plateau detected: X-coordinate #{@instructions[0]} and Y-coordinate #{@instructions[1]}."
+    puts "Lower-left corner of Plateau is X-coordinate #{@lower_left_corner[0]} and Y-coordinate #{@lower_left_corner[1]}."
 
     # Initial Rover placement:
-    @x_coordinate = @instructions[2]
-    @y_coordinate = @instructions[3]
+    @x_coordinate = @instructions[2].to_i
+    @y_coordinate = @instructions[3].to_i
     @direction = @instructions[4]
     direction_to_string
-    puts "A Mars Rover landed at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
+    puts "A Mars Rover landed on the Plateau at X-coordinate #{@x_coordinate} and Y-coordinate #{@y_coordinate}, facing #{@direction_to_string}."
     # Rover movement:
-    @instructions.each do |character|
+    @movements = @instructions[5].split("")
+    @movements.each do |character|
       if character == "L"
         turn_left
       elsif character == "R"
