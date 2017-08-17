@@ -1,6 +1,6 @@
 # Mars Rover
 
-For now, the program works for a single Rover object only.
+For now, the program works for one Rover at a time.
 
 Use rover1.txt and rover2.txt for inputs.
 
