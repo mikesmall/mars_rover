@@ -20,24 +20,24 @@ class Rover
     # @text_filename = gets.chomp.to_s
     # File.open(@text_filename).each do |line|
     #  @input = line.split('')
-    end
+    read_instruction
   end
 
-  def read_instruction(instruction)
+  def read_instruction
     # Split file contents into array
     @raw_input = @text_filename.split
 
     # Convert first two characters to integers -- they will establish upper right corner (5, 5)
     # (the lower left is assumed to be 0, 0)
     # Store in a variable for the upper right corner (This information doesn't seem useful to keep)
-    @upper_right_corner = @text_filename(0,1)
+    @upper_right_corner = @text_filename[0,1]
 
     # Remove those two integers:
     @rover_movement = @raw_input.shift(2)
 
     # Get initial placement:
-    @x_coordinate = @rover_movement(0).to_i
-    @y_coordinate = @rover_movement(1).to_i
+    @x_coordinate = @rover_movement[0].to_i
+    @y_coordinate = @rover_movement[1].to_i
 
     # Iterate over the array:
     @rover_movement.each do |character|
@@ -47,8 +47,9 @@ class Rover
         turn_right
       elsif character == 'M'
         move
+      end
     end
-
+    give_result
   end
 
   def turn_left
@@ -106,6 +107,5 @@ class Rover
 
 end
 
-get_file
-read_instruction(@text_filename)
-give_result
+rover1 = Rover.new
+rover1.get_file
